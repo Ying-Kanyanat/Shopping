@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping</title>
+
+    <link rel="stylesheet" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="index.js"></script> <!--ไฟล์ index.js แนะนำให้อิมพอร์ตด้านล่างตัว Jquery-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--Sweetalert-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> <!--Import ในส่วนของ font-awesome-->
+</head>
+<body>
+    
+    <nav>  <!--ที่ตัว nav จะมี 2 กล่อง คือ กล่องโลโกเวปเราและกล่องตระกร้าสินค้า-->
+        <div class="nav-container"> <!--ทำเป็นกล่องเพื่อง่ายต่อการจัดรูปแบบตัวโลโก้และตระกร้าสิ้นค้า-->
+            <a href="index.html"> <!--กล่องเเรกเป็น tag a เวลาคลิ๊กนี่ให้เปิดหน้าเเรก คือ index.html-->
+                <img src="./imgs/1.png" class="logonav">
+            </a>
+
+            <!-- กล่องที่ 2 ตัวตระกร้า -->
+            <div class="nav-profile"> <!--nav-profile แบ่งเป็น 2 กล่อง -->
+                <p class="nav-profile-name">Basket</p>
+                <div onclick="openCart()" style="cursor: pointer;" class="nav-profile-cart">
+                    <i class="fas fa-cart-shopping"></i>
+                    <div id="cartcount" class="cartcount" style="display: none;">
+                        0
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="sidebar">
+            <input onkeyup="searchsomething(this)" id="txt_search" type="text" class="sidebar-search" placeholder="Search something...">
+            <!-- onkeyup => เวลาเรายกปุ่มขึ้นเเล้วมันจะเริ่มทำงาน -->
+            <!-- ใช้ onchange ไม่ได้ เพราะเวลาเสิร์ชต้องพิมพ์เสร็จมันถึงจะหาให้ ให้เปลี่ยนเป็น onkeyup แทน onchange => ถ้า input มีการเปลี่ยนมันจะทำการเรียกใช้ฟังก์ชัน searchsomething ซึ่งในฟังก์ชันจะทำการส่งตัง this ไป ซึ่ง this คือ element ตัวนี้ <input onchange="searchsomething(this)" id="txt_search" type="text" class="sidebar-search" placeholder="Search something..."> ทั้งก้อน-->
+            <!-- ฟังก์ชัน onclick เวลามีการคลิ๊กปุ่มนี้เข้ามา เราจะทำการ search มัน -->
+            <a style="cursor: pointer;" onclick="searchproduct('All')" class="sidebar-items">
+                All product <!-- Menu 1 -->
+            </a>
+            <a style="cursor: pointer;" onclick="searchproduct('Cookies')" class="sidebar-items">
+                Cookies <!-- Menu 2 -->
+            </a>
+            <a style="cursor: pointer;" onclick="searchproduct('Hamberger')" class="sidebar-items">
+                Hamberger <!-- Menu 3 -->
+            </a>
+            <a style="cursor: pointer;" onclick="searchproduct('Drinks')" class="sidebar-items">
+                Drinks <!-- Menu 4 -->
+            </a>
+
+        </div>
+        <div id="productlist" class="product">
+            
+            
+        </div>
+    </div>
+
+    <div id="modalDesc" class="modal" style="display: none;">
+        <div onclick="closeModal()" class="modal-bg"></div> <!--เราสร้าง background นี้ เพื่อหลอก user ซึ่งตัวนี้เราจะทิ้งไว้แบบนี้ ปล่อยไว้เลย ไม่ได้ใช้งาน-->
+        <div class="modal-page"> <!--กล่องสีขาวที่เราคลิ๊กที่รูปภาพแล้วมันป๊อบอัพขึ้นมา-->
+            <h2>Detail</h2>
+            <br> <!--Detailอยู่ติดกับรูปเกินไป เราเลยใส่แท็ก br เพื่อ enter-->
+            <div class="modaldesc-content"> <!--เราจะสร้าง 2 กล่อง คือ กล่อง img และ modaldesc-detail-->
+                <img id="mdd-img" class="modaldesc-img" src="https://media.istockphoto.com/id/517321409/th/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2/%E0%B8%84%E0%B8%B8%E0%B8%81%E0%B8%81%E0%B8%B5%E0%B9%89%E0%B9%83%E0%B8%99%E0%B8%8A%E0%B8%B2%E0%B8%A1%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%81%E0%B8%AA%E0%B8%B5%E0%B8%82%E0%B8%B2%E0%B8%A7.jpg?s=612x612&w=0&k=20&c=2l4hZF-fZNmQSZwSUKhZZvUOyvloSdX-1Gtakl7RwNM=" alt="">
+                <div class="modaldesc-detail">
+                    <p id="mdd-name" style="font-size: 1.5vw;">Product name</p>
+                    <p id="mdd-price" style="font-size: 1.2vw;">500 THB</p>
+                    <br>
+                    <p id="mdd-desc" style="color: #adadad;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione asperiores temporibus cupiditate ea rerum quo laudantium maxime esse quas fugiat non dignissimos, repellat, minima fuga quibusdam sapiente libero dolor. Nemo atque maiores praesentium voluptate repellendus!</p>
+                    <br>
+                    <div class="btn-control">
+                        <button onclick="closeModal()" class="btn">
+                            close
+                        </button>
+                        <button onclick="addtocart()" class="btn btn-buy">
+                            Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+
+    <div id="modalCart" class="modal" style="display: none;">
+        <div onclick="closeModal()" class="modal-bg"></div> <!--เราสร้าง background นี้ เพื่อหลอก user ซึ่งตัวนี้เราจะทิ้งไว้แบบนี้ ปล่อยไว้เลย ไม่ได้ใช้งาน-->
+        <div class="modal-page"> <!--กล่องสีขาวที่เราคลิ๊กที่รูปภาพแล้วมันป๊อบอัพขึ้นมา-->
+            <h2>My cart</h2>
+            <br> <!--Detailอยู่ติดกับรูปเกินไป เราเลยใส่แท็ก br เพื่อ enter-->
+            <div id="mycart" class="cartlist">
+
+                
+                
+                
+            </div>
+            <div class="btn-control">
+                <button onclick="closeModal()" class="btn">
+                    Cancel
+                </button>
+                <button class="btn btn-buy">
+                    Buy
+                </button>
+            </div>
+
+        </div> 
+    </div>
+
+</body>
+</html>
+
+
+

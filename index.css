@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap'); /*font copied from google font*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans", sans-serif; /*การเรียกใช้งาน font family ที่ import มา*/
+    text-decoration: none; /*เวลาเราพิมพ์ตัวอักษรบางครั้ง tag a จะชอบแถมเส้นใต้มาให้ เพื่อไม่ให้แถมเส้นใต้มา(ไม่เอาเส้นใต้เลย) เลยระบุตัวนี้เป็น none*/
+}
+nav {
+    width: 100%;
+    height: 7vw;
+    background: linear-gradient(125deg, #f9fc4d, #ecf728); /*ทำมุนความเฉียงของ BG 125 องศา*/
+}
+.nav-container {
+    max-width: 90vw;
+    height: 100%; /*ความสูงอ้างอิงตาม tag nav*/
+    /*background: #28f72b;*/
+    margin: 0 auto; /*เป็นการจัดซ้ายขวาให้อยู่ auto (สิ่งที่เราจัดนั้นก็จะอยู่ตรงกลาง)*/
+    display: flex; /*จะทำการให้ภาพโลโก้และตระกร้าสินค้าเป็นแนวนอน*/
+    justify-content: space-between; /*จะทำการให้ภาพโลโก้และตระกร้าสินค้าแยกซ้ายขวาอิสระ*/
+    align-items: center; /*ให้ทั้งสองกล่องอยู่กึ่งกลาง*/
+} 
+.logonav {
+    width: 7.3vw;
+    margin-top: 5px;
+    object-fit: contain; /*Object-fit เป็นการรักษาสมดุลของรูปภาพ; Contain มันจะแสดงรูปทั้งหมดเลย*/
+}
+.nav-profile {
+    /*background: palegreen;*/
+    display: flex;
+    align-items: center;
+}
+.nav-profile-name {
+    color: #030101b2;
+    font-size: 1.2vw;
+    margin-right: 10px; /*เป็นการเว้นจากขอบนอก element ออกไป*/
+}
+.fa-cart-shopping {
+    font-size: 2vw;
+    color: #030101dd;
+}
+.nav-profile-cart {
+    position: relative; /*เราจะเอาตัวคลาสนี้เป็นตัวอ้างอิง ให้ตำแหน่งตัวอื่นให้อ้างอิงตำแหน่งของตัวนี้*/
+}
+.cartcount {
+    position: absolute;
+    /*การปรับตำแหน่งวงกลมเลข 5 ว่าให้อยู่ตรงไหนของตระกร้า ตอนแรกตั้ง top,right 0,0 ก่อน จากนั้นก็กด inspect แล้วใช้เม้าท์คลิ๊กปรับตามที่ต้องการ*/
+    top: -15px;
+    right: -8px;
+    width: 25px; /*lenght of the box*/
+    height: 25px; /*height of the box*/
+    background: red;
+    border-radius: 50%; /*ทำกล่องสี่เหลี่ยมเป็นวงกลม*/
+    /*ให้เลข 5 อยู่ตรงกลาง*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /*เลข 5 เป็นสีขาว*/
+}
+.container {
+    width: 90vw;
+    /*background: green;*/
+    margin: 0 auto; /*จัดให้กล่องเขียวอยู่ตรงกลสง*/
+    display: flex; /*เพื่อให้กล่องสีฟ้าและสีเขียวเป็นแนวนอน*/
+}
+.sidebar {
+    width: 20%;
+    padding: 10px; /*เป็นการเว้นระยะจากขอบเข้ามาข้างใน element*/
+    /*background: greenyellow;*/
+    display: flex;
+    flex-direction: column;
+}
+.product {
+    width: 80%;
+    padding: 10px;
+    height: 100%;
+    /*background: aquamarine;*/
+    display: grid; /**ทำตัวกล่องให้สินค้า มันดีกว่าใช้ flex*/
+    grid-template-columns: repeat(4, 1fr); /*1fr มันจะคำนวนณความยาวให้ออโต้เลย (ความยาวของคอลัมภ์)*/
+    grid-gap: 20px; /*เป็นการกำหนดช่องว่างให้กับตัวคอลัมภ์ (ตัวกราฟ)*/
+}
+.sidebar-search {
+    padding: 10px;
+    border: 2px solid transparent; /*transparent สีโปร่งใส*/
+    width: 100%;
+    font-size: 1.2vw; /*กำหนดขนาดตัวหนังที่เราพิมพ์หาในกล่อง ใช้หน่วย vw เพราะเวลาเราหดหน้าเว็บตัวอักษรจะหดตามตามขนาดที่เหมาะสม (เวลาเราย่อจอมันจะเกิด Responsive(ตอบสนอง) เองเลย)*/
+    outline: none;
+    border-radius: 5px;
+    background: #f2f2f2;
+    transition: 0.3s; /*ขอบเส้นสีแดงค่อยๆเฟดปรากฎขึ้น/ออก เมื่อเราโฟกัสกล่อง*/
+    margin-bottom: 20px;
+}
+/*เวลาคลิ๊กให้ขึ้นขอบสีแดง*/
+.sidebar-search:focus { /*ถ้ากล่องตัวนี้ถูกโฟกัสเราจะให้*/
+    border: 2px solid #E61b36;
+}
+.sidebar-items {
+    background: #f2f2f2; /*สีเทา*/
+    margin-bottom: 10px; /*เว้นระยะห่างด้านล่าง 10 px*/
+    padding: 10px; /*แต่ละเมนูห่างจากกล่องตัวเอง 10 px*/
+    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    color: #000; /*สีตัวอักษร*/
+    transition: 300ms; /*เวลาเอาเม้าท์ไปชี้จะทำให้รูปแบบที่เเสดงค่อยๆเฟดเข้าเเละออกเมื่อยกเม้าท์ออก เราจะทำการ transition ที่ตัวหลัก*/
+    font-size: 1.2vw;
+}
+.sidebar-items:hover { /*เราเอาเม้าท์ไปชี้ค้าง*/
+    background: #9c1032;
+    color: #fff;
+}
+.product-items {
+    /*background: gold;*/
+    cursor: pointer; /*เปลี่ยนเมาท์เป็นรูปมือ (กำหนดเพื่อให้รู้ว่ากล่องนี้สามารถคลิ๊กได้)*/
+    transition: 0.3s; /*ถ้าเราไม่มีตัวนี้เวลาเอาเมาท์ไปชี้ที่รูปภาพมันจะพึบขยายขึ้นเลย แต่ถ้าเรามีตัวนี้มันจะค่อยๆขยายตามเวลาที่เรากำหนดทำให้เวลาที่ภาพขยายมันจะดู smooth ขึ้น*/
+}
+/*การกำหนดให้ภาพซูมได้ นั่นก็ตือ เมื่อใช้เมาท์คลิ๊กแล้วภาพจะขยายตามที่เรากำหนดขนาดไว้ใน scale*/
+.product-items:hover {
+    transform: scale(1.03); /*Scale default มันคือ 1; default คือค่ามาตรฐานที่กำหนดไว้ในโปรแกรมสำเร็จ(ทุกโปรแกรม) ให้เป็นค่าที่ใช้ในตอนเริ่มต้นโปรแกรม ทุกครั้งที่เรียกโปรแกรมนี้ใช้ คอมพิวเตอร์ก็จะใช้ค่าที่ตั้งไว้นี้*/
+}
+/*กำหนดลักษณะให้กับภาพคุกกี้*/
+.product-img{
+    width: 100%; /*ความยาวของภาพ*/
+    height: 17vw; /*ความสูงของภาพ*/
+    object-fit: cover; /*รักษาสมดุลของภาพ เลือก cover เพราะถึงแม้ภาพจะมีการกินขอบไปหรืออะไรแต่ตัวภาพยังต้องรักษาสมดุล ถ้าเลือก contain เหมือนโลโก้คือมันจะเอาภาพทั้งหมด*/
+    border-radius: 10px;
+}
+.modal, .modal-bg {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /*0.5 ความจางของสี*/
+    position: fixed; /*คือ ถ้าเราไม่กำหนดตัวนี้ตัว modal มันไปอยู่ล่างสุดเลย มันไม่ขยายตามขนาดที่เรากำหนดคือ W100% H100% กำหนดตัวนี้เเล้วยังไม่พอ เราต้องกำหนด top และ left ด้วย*/
+    top: 0; /*อยู่ชิดบน*/
+    left: 0; /*อยู่ชิดซ้าย*/
+    /*modal-page มันอยู่ใน modal ดังนั้นเราต้องการจัดให้อยู่ตรงกลาง เราต้องมาจัดไว้ตรงนี้ โดยกำหนดดังนี้*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-page {
+    z-index: 99; /*เนื่องจากตั้งค่าความจางของ background อยู่ที่ 0.2 ทำให้ modal page จางไปด้วย เนื่องจากmodal page อยู่ภายใต้ modal-bg ดังนั้นเราจึงใส่ z-index: 99 เพื่อให้ modal-page ชัดขึ้นมา/ให้มันดันขึ้นมาสูงกว่าตัว bg*/
+    min-width: 30vw;
+    max-width: 60vw;
+    max-height: 30vw;
+    overflow: scroll; /*ให้สามารถ scroll(เลื่อน)ได้*/
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px; /*ตัวอักษรที่เราใส่ไปมันอยู่ชิดขอบเกินไป เราเลยต้องกำหนด padding*/
+}
+.modaldesc-content {
+    /*background: aqua;*/
+    width: 100%;
+    /*ต้องการให้กล่อง 2 กล่องที่เราสร้างขึ้นเปลี่ยนการวางแนวแกนตั้งเป็นแนวนอน ให้กำหนดดังนี้*/
+    display: flex;
+}
+.modaldesc-detail {
+    /*background: forestgreen;*/
+    /*img กับ กล่องสีเขียวติดกันเกินไปต้องทำให้ห่างกันทำได้ 2 แบบ คือ กำหนด margin-rightให้กับรูปภาพ หรือ กำหนด margin-leftให้กล่องสีเขียว เราจะกำหนด margin-left ให้กล่องสีเขียว*/
+    margin-left: 20px;
+}
+.modaldesc-img {
+    width: 20vw;
+    height: 20vw;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.btn-control {
+    /*background: hotpink;*/
+    /*ให้ปุ่ม Close และ Add to cart ชิดขวา ซึ่งตัวควบคุมมันคือกล่องสีชมพู*/
+    display: flex;
+    justify-content: flex-end;
+}
+.btn {
+    padding: 10px 20px; /*ค่าเเรกเว้นบนเเละล่าง ค่าที่ 2 เว้นซ้ายขวา*/
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2vw;
+    transition: 0.3s;
+}
+.btn-buy {
+    background: linear-gradient(125deg, #fa9a13e4, #f79103dd);
+    color: #fff;
+    margin-left: 10px; /*ปุ่มสีแดงก็จะเว้นระยะด้านซ้าย 10px*/
+}
+.cartlist {
+    /*background: hotpink;*/
+}
+.cartlist-items {
+    /*background: yellow;*/
+    width: 50vw;
+    display: flex; /*ให้กล่องเขียวหับทองต่อกันเป็นแนวนอน*/
+    justify-content: space-between; /*ให้สองกล่องแยกซ้ายเเละขวา*/
+    margin-bottom: 20px; /*ให้ด้านล่างแต่ละรายการห่างกัน 20px*/
+}
+.cartlist-left {
+    /*background: greenyellow;*/
+    display: flex; /*ให้กล่องสีเขียวกับรูปภาพเป็นแนวนอน*/
+}
+.cartlist-right{
+    /* background: gold; */
+    display: flex;
+    align-items: center;
+}
+/*เราไม่อยากสร้าง class เพิ่มที่แท็ก img เราก็สามารถใช้ .cartlist-left img คือ โปรแกรมจะมองที่คลาส cartlist-left แล้วมองเข้าไปหาแท็ก img ที่อยู่ภายใต้คลาส cartlist-left*/
+.cartlist-left img {
+    width: 5vw;
+    height: 5vw;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px; /*เว้นระยะฝั่งขวาไป 10 px*/
+}
+.btnc {
+    width: 30px;
+    height: 30px;
+    /* background: hotpink; */
+    border-radius: 50%; /*เปลี่ยนจากสี่เหลี่ยมเป็นวงกลม*/
+    /*ให้ตัวอักษรอยู่ตรงกลาง*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000; /*สร้างขอบให้วงกลม*/
+    cursor: pointer;
+}
